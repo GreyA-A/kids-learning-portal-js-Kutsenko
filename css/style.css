@@ -627,3 +627,151 @@ article figure img:hover {
 .page-feedback textarea:focus {
     outline: 3px solid var(--fun-yellow);
 }
+
+/* ==========================================================================
+   ЛАБОРАТОРНА №4. Стилі для падаючих іграшок та денної/нічної теми
+   ========================================================================== */
+
+/* Контейнер для падаючих іграшок всередині шапки */
+.brand-header {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    height: 140px;
+    overflow: hidden; /* Іграшки не вилітають за межі блоку */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+}
+
+/* Логотип і назва знаходяться поверх падаючих іграшок */
+.brand-header img,
+.brand-header h1 {
+    position: relative;
+    z-index: 2;
+}
+
+/* Шар з падаючими іграшками на фоні */
+.toys-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1; /* Позаду тексту, але всередині блоку */
+}
+
+/* Падаюча іграшка */
+.falling-toy {
+    position: absolute;
+    top: -60px;
+    user-select: none;
+    opacity: 0.85;
+    animation: fallAnimation linear forwards;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes fallAnimation {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(180px) rotate(360deg);
+        opacity: 0.1;
+    }
+}
+
+/* ==========================================================================
+   Теми за часом доби: з 6:00 до 21:00 фон на 40% світліший за нічний
+   ========================================================================== */
+
+/* Нічна тема (21:00 – 06:00) — базові темніші фони */
+body.theme-night {
+    --bg-page: #1a222d;
+    --card-bg-rgb: rgb(27, 36, 48);
+    --text-main: #F1F5F9;
+    --accent-color: #CE93D8;
+    --soft-green: #81C784;
+    --gray-muted: #64748B;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+}
+
+body.theme-night aside,
+body.theme-night #about,
+body.theme-night table,
+body.theme-night footer {
+    background-color: var(--card-bg-rgb);
+    color: var(--text-main);
+}
+
+body.theme-night .interactive-card,
+body.theme-night #about p:first-of-type {
+    background-color: #243041;
+    border-color: #3B4B61;
+    color: #F8FAFC;
+}
+
+body.theme-night #about p:first-of-type:hover {
+    background-color: #2D3D52;
+    border-color: #FFB74D;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+body.theme-night #about p span {
+    color: #E1BEE7;                 /* Яскравий бузковий колір */
+    text-shadow: 0 0 8px rgba(225, 190, 231, 0.3);
+}
+
+body.theme-night #about p em {
+    color: #A5D6A7;                 /* Чіткий м'ятно-зелений */
+}
+
+body.theme-night aside a {
+    color: #90CAF9;                 /* Яскравий блакитний для посилань */
+    text-decoration: underline;
+}
+
+body.theme-night aside a:hover {
+    color: #FFD54F;                 /* Золотистий hover */
+}
+
+body.theme-night h2 + p,
+body.theme-night #study-plan > p {
+    color: #CBD5E1;
+}
+
+body.theme-night #study-plan > p::first-letter {
+    color: #66BB6A;                 /* Світліший зелений для збереження вимоги */
+    text-shadow: 0 0 10px rgba(102, 187, 106, 0.6);
+}
+
+body.theme-night #study-plan tfoot tr {
+    background-color: #1E293B;
+    color: #F8FAFC;
+}
+
+body.theme-night #study-plan tfoot td,
+body.theme-night #study-plan tfoot th {
+    color: #FFFFFF;
+    border-color: #334155;
+}
+
+body.theme-night #study-plan td {
+    color: #E2E8F0;
+}
+
+/* Денна тема (06:00 – 21:00) — фон на 40% світліший */
+body.theme-day {
+    --bg-page: #FAFDFE;
+    --card-bg-rgb: rgb(255, 255, 255);
+    --text-main: #2C3E50;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+}
+
+body.theme-day aside,
+body.theme-day table {
+    background-color: var(--card-bg-rgb);
+}
