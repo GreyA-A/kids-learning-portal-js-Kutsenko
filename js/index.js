@@ -6,6 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initTimeTheme();
     initFallingToys();
+    initAuthorFlipCard();
 });
 
 /**
@@ -93,4 +94,25 @@ function initFallingToys() {
 
     // Періодична генерація іграшок кожні 900 мс
     setInterval(spawnToy, 900);
+}
+
+/**
+ * 3. Інтерактивна 3D фліп-картка автора курсу (Вимога 2):
+ * При наведенні курсора на зображення/картку вона розгортається зворотним боком з цитатою
+ */
+function initAuthorFlipCard() {
+    const authorCard = document.getElementById('authorCard');
+    if (!authorCard) return;
+
+    // Обробник наведення миші: розгортаємо картку
+    authorCard.addEventListener('mouseenter', () => {
+        authorCard.classList.add('is-flipped');
+        console.log('[Фліп-карта]: Картка розгорнута (mouseenter). Відображено девіз автора.');
+    });
+
+    // Обробник відведення миші: повертаємо у вихідний стан
+    authorCard.addEventListener('mouseleave', () => {
+        authorCard.classList.remove('is-flipped');
+        console.log('[Фліп-карта]: Картка повернута назад (mouseleave).');
+    });
 }
