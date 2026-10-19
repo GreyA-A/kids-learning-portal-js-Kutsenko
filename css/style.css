@@ -1160,3 +1160,116 @@ body.theme-night.page-courses footer {
     border-top-color: #334155;
     color: #94A3B8;
 }
+
+/* ==========================================================================
+   Сторінка «Зворотній зв'язок»: Тултіп та hover-ефект для поля «Детально»
+   ========================================================================== */
+
+/* Відносне позиціонування контейнера поля для розміщення тултіпа */
+.form-details {
+    position: relative;
+}
+
+/* Стан поля «Детально» при наведенні (задається через JS-клас) */
+#feedback-details.details-hovered {
+    background-color: #FFFDE7 !important;            /* Зміна кольору фону */
+    border: 2px solid #FF9800 !important;             /* Поява акцентної рамки */
+    box-shadow: 0 0 15px rgba(255, 152, 0, 0.45) !important; /* Поява виразної тіні */
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Спливаюча підказка (Tooltip) */
+.details-tooltip {
+    position: absolute;
+    top: 35px;
+    left: calc(100% + 15px);                         /* Розташування строго праворуч від поля */
+    width: 250px;
+    background: linear-gradient(135deg, #FF6F00, #FFA000);
+    color: #FFFFFF;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.4;
+    box-shadow: 0 6px 18px rgba(255, 111, 0, 0.35);
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Стрілочка тултіпа вказівником наліво (до поля) */
+.details-tooltip::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -8px;
+    border-width: 8px 8px 8px 0;
+    border-style: solid;
+    border-color: transparent #FF6F00 transparent transparent;
+}
+
+/* Активний стан тултіпа */
+.details-tooltip.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Адаптація під темну тему */
+body.theme-night.page-feedback,
+body.theme-night.page-feedback main {
+    background-color: #141A22;
+    color: #F1F5F9;
+}
+
+body.theme-night.page-feedback fieldset {
+    background-color: #1E293B;
+    border-color: #4CAF50;
+    color: #F1F5F9;
+}
+
+body.theme-night.page-feedback input,
+body.theme-night.page-feedback select,
+body.theme-night.page-feedback textarea {
+    background-color: #0F172A;
+    color: #F8FAFC;
+    border: 1px solid #334155;
+}
+
+body.theme-night #feedback-details.details-hovered {
+    background-color: #1E293B !important;
+    border-color: #FFB74D !important;
+    box-shadow: 0 0 16px rgba(255, 183, 77, 0.4) !important;
+}
+
+body.theme-night .details-tooltip {
+    background: linear-gradient(135deg, #E65100, #BF360C);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    border: 1px solid #FFB74D;
+}
+
+body.theme-night .details-tooltip::before {
+    border-color: transparent #E65100 transparent transparent;
+}
+
+/* На вузьких екранах тултіп зміщується під поле, щоб не вилазити за екран */
+@media (max-width: 900px) {
+    .details-tooltip {
+        left: 0;
+        top: 100%;
+        margin-top: 10px;
+        width: calc(100% - 32px);
+    }
+
+    .details-tooltip::before {
+        top: -8px;
+        left: 30px;
+        border-width: 0 8px 8px 8px;
+        border-color: transparent transparent #FF6F00 transparent;
+    }
+
+    body.theme-night .details-tooltip::before {
+        border-color: transparent transparent #E65100 transparent;
+    }
+}
