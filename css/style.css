@@ -1,0 +1,629 @@
+/* ==========================================================================
+   Лабораторна робота №2. Базові стилі дитячого веб-порталу «Розумники»
+   Стиль дизайну: Мальований / ігровий
+   ========================================================================== */
+
+/* 1. Підключення двох різних шрифтів: Nunito та Open Sans */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* Глобальні змінні кольорів різними способами (HEX, RGB, HSL, Name) */
+:root {
+    --primary-color: #FF6F00; /* HEX */
+    --primary-dark: #E65100; /* HEX */
+    --accent-color: #4A148C; /* HEX (за варіантом)*/
+    --card-bg-rgb: rgb(255, 255, 255); /* RGB */
+    --shadow-color: rgba(74, 20, 140, 0.15); /* RGBA */
+    --soft-green: hsl(142, 55%, 45%); /* HSL */
+    --fun-yellow: hsl(45, 100%, 51%); /* HSL */
+    --text-main: #2C3E50; /* HEX */
+    --bg-page: #F5F9FC; /* HEX */
+    --amber: #FFB74D; /* HEX */
+    --amber-light: #FFE082; /* HEX */
+    --link-blue: #1565C0; /* HEX */
+    --gray-muted: #90A4AE; /* HEX */
+
+}
+
+/* Універсальний селектор */
+* {
+    box-sizing: border-box;
+}
+
+/* 2. Базові правила для body */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-page);
+    font-family: 'Open Sans', sans-serif;   /* Шрифт №1: основний текст */
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* Селектор елементів: заголовки отримують шрифт №2 (Nunito) */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', sans-serif;      /* Шрифт №2: заголовки */
+    color: var(--primary-dark);
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Комбінатор нащадка (пробіл): кнопки всередині посилань */
+a button {
+    cursor: pointer;
+}
+
+/* Комбінатор безпосередньої дитини (>) */
+nav > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+nav > ul > li > a {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--fun-yellow);
+    color: #333333;
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    border-radius: 20px;
+    box-shadow: 0 3px 6px var(--shadow-color);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+nav > ul > li > a:hover {
+    background-color: #FFB300;
+    transform: translateY(-2px);
+}
+
+/* Селектор за атрибутом із частковим входженням [attr*=value] */
+a[href*="courses"] {
+    background-color: #81C784 !important; /* Зеленуватий акцент для навчальних матеріалів */
+    color: white !important;              /* Спосіб кольору: Name */
+}
+
+a[href*="feedback"] {
+    background-color: #64B5F6 !important; /* Блакитний для зворотного зв'язку */
+    color: white !important;
+}
+
+/* Суміжний сестринський комбінатор (+) */
+h2 + p {
+    font-size: 1.05rem;
+    color: #546E7A;
+}
+
+/* Селектори кнопок форми та дій */
+button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;                         /* Спосіб кольору: Name */
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: all 0.25s ease;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.03);
+}
+
+/* Селектор за обов'язковим атрибутом [required] */
+input[required], textarea[required], select[required] {
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Стилізація зображень у мальованому стилі */
+img {
+    border-radius: 14px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Спільний футер */
+footer {
+    background: #ECEFF1;
+    text-align: center;
+    padding: 24px;
+    margin-top: 40px;
+    border-top: 4px dashed #CFD8DC;
+    font-size: 0.95rem;
+}
+
+
+/* ==========================================================================
+   3. Стилі для Головної сторінки (index.html) — Варіант 4
+   ========================================================================== */
+
+/* 1. Позиціонування шапки (position: relative, z-index) */
+header {
+    position: relative;
+    padding-top: 150px;                     /* Місце для абсолютно позиціонованого логотипу */
+    padding-bottom: 20px;
+    z-index: 10;
+}
+
+/* Вимога варіанта: Назва веб-порталу та логотип абсолютно позиціоновані з 0 відступом зверху */
+header > div:first-child {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+header > nav {
+    margin-bottom: 10px;
+}
+
+header div:last-child {
+    display: flex;
+    gap: 10px;
+}
+
+/* 2. Макет сторінки на CSS Grid (п. 6 завдання) */
+@media (min-width: 768px) {
+    body {
+        display: grid;
+        grid-template-areas:
+            "header header"
+            "aside main"
+            "footer footer";
+        grid-template-columns: 340px 1fr;
+        gap: 24px;
+        padding: 0 20px;
+    }
+
+    header {
+        grid-area: header;
+    }
+
+    aside {
+        grid-area: aside;
+        position: static;                   /* Друге значення position: static */
+        background: var(--card-bg-rgb);     /* RGB */
+        padding: 16px;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        height: fit-content;
+    }
+
+    main {
+        grid-area: main;
+    }
+
+    footer {
+        grid-area: footer;
+    }
+
+    /* Ховаємо <hr>, бо вони є прямими дітьми body і ламають сітку */
+    body > hr {
+        display: none;
+    }
+}
+
+audio {
+    width: 100%;
+    min-width: 300px;
+    box-sizing: border-box;
+    max-width: 100%;
+    display: block;
+    margin: 12px 0;
+}
+
+/* 3. Float: відео ЗЛІВА, фото СПРАВА */
+article figure {
+    margin: 0;
+}
+
+/* Відео — зліва, текст обтікає справа */
+article figure.media-left {
+    float: left;
+    clear: left;
+    width: 45%;
+    max-width: 480px;
+    margin: 4px 20px 12px 16px;
+}
+
+/* Завдання починаються під відео, на всю ширину */
+#about .tasks-title,
+#about .tasks-list {
+    clear: left;
+}
+
+/* Бонус: білий фон першого абзацу більше не заходить під відео */
+#about p:first-of-type {
+    display: flow-root;
+}
+
+/* Фото — справа, текст обтікає зліва */
+article figure.media-right {
+    float: right;
+    clear: right;
+    width: 30%;
+    max-width: 240px;
+    margin: 4px 16px 12px 20px;
+}
+
+/* Медіа заповнюють фігуру; float усередині фігури скидаємо */
+article figure img,
+article figure video {
+    display: block;
+    float: none;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+article figcaption {
+    font-size: 0.9rem;
+    padding: 6px 0;
+}
+
+/* Клірфікс: наступні блоки не наїжджають на float */
+article::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Вузькі екрани: прибираємо обтікання */
+@media (max-width: 600px) {
+    article figure.media-left,
+    article figure.media-right {
+        float: none;
+        width: 100%;
+        max-width: none;
+        margin: 12px 0;
+    }
+}
+
+/* 4. Вимога варіанта: Блок опису мети та завдань має margin, але НЕ має padding */
+/* 5. Вимога: блок з найбільшим обсягом тексту зі смугою прокручування (overflow) */
+#about {
+    margin: 30px 20px 25px 20px;
+    padding: 0 !important;          /* вимога варіанта */
+    border: 2px dashed var(--amber);
+    border-radius: 12px;
+    max-height: 420px;
+    overflow-y: auto;               /* прокрутка лишається, а також створює BFC */
+}
+
+/* Стилізація слів з обов'язкового речення (span, b, i, em, u) */
+#about p span {
+    color: var(--accent-color);       /* HEX: #4A148C */
+    font-weight: 700;
+}
+
+#about p em {
+    color: var(--soft-green);         /* HSL */
+}
+
+/* Маркери списку завдань (псевдоелемент ::marker) */
+.tasks-list li::marker {
+    color: var(--soft-green);
+}
+
+/* Відступи від рамки без padding у самому #about */
+#about > :not(figure) {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+/* 6. Вимога варіанта: Перша літера тексту про те, чому навчають, має тінь та темно-зелений колір */
+#study-plan > p::first-letter {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: darkgreen;                     /* Спосіб задання кольору: Name */
+    text-shadow: 2px 2px 4px rgba(0, 100, 0, 0.4);
+    float: left;
+    margin-right: 1px;
+    line-height: 1;
+}
+
+/* 7. Вимога варіанта: Зміщення таблиці при наведенні курсору праворуч на 2% ширини viewport (2vw) */
+#study-plan .table-wrap {
+    width: calc(100% - 2.5vw);
+}
+
+#study-plan table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg-rgb);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+/* Вимога варіанта: зсув праворуч на 2vw при наведенні */
+#study-plan .table-wrap:hover table {
+    transform: translateX(2vw);
+}
+
+#study-plan th,
+#study-plan td {
+    border: 1px solid var(--amber-light);
+    padding: 10px;
+    text-align: left;
+}
+
+#study-plan thead th {
+    background-color: var(--amber);
+    color: var(--card-bg-rgb);
+}
+
+#study-plan tfoot tr {
+    background-color: #FFF8E1;
+    font-weight: bold;
+}
+
+/* 8. Вимога варіанта: Тінь у блоку контактів через 2 сек при фокусуванні */
+footer#contacts {
+    outline: none;
+    cursor: pointer;
+    /* Затримка появи тіні рівно 2 секунди (transition-delay: 2s) */
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    border: 2px solid transparent;
+}
+
+footer#contacts:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 25px 6px rgba(255, 111, 0, 0.45); /* Поява помітної тіні */
+    transition: box-shadow 0.4s ease 2s, border-color 0.4s ease;
+}
+
+/* 9. Вимога п. 4: Елемент із переходом між 2 стилями (не менше 3 властивостей) */
+.interactive-card,
+#about p:first-of-type {
+    background-color: var(--card-bg-rgb);
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* 3 властивості переходу */
+}
+
+#about p:first-of-type:hover {
+    background-color: #FFFDE7;
+    border-color: #FFD54F;
+    box-shadow: 0 6px 16px rgba(255, 179, 0, 0.25);
+}
+
+/* Анімація зростання насиченості фото до 150% */
+@keyframes saturate-up {
+    from { filter: saturate(1); }
+    to   { filter: saturate(1.5); }
+}
+
+article figure img:hover {
+    animation: saturate-up 0.6s ease forwards;
+}
+
+
+/* ==========================================================================
+   Сторінка «Наші курси» — Grid, Варіант 4
+   ========================================================================== */
+
+/* Сітка сторінки без aside: одна колонка */
+.page-courses {
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    grid-template-columns: 1fr;
+}
+
+/* Вимога: блок з назвою та логотипом фіксований зверху */
+.page-courses header {
+    padding-top: 100px;                     /* місце під фіксовану панель */
+}
+
+.page-courses header > div:first-child {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-sizing: border-box;
+    padding: 8px 20px;
+    background: var(--card-bg-rgb);
+    box-shadow: 0 3px 10px var(--shadow-color);
+}
+
+.page-courses header > div:first-child img {
+    width: 64px;
+    height: 64px;
+}
+
+.page-courses header h1 {
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+/* Картки курсів: адаптивна сітка (Grid) */
+.page-courses section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr));
+    gap: 24px;
+}
+
+.page-courses section > hr {
+    display: none;
+}
+
+/* Вимога: темно-фіолетова рамка, права межа суцільна тонка, ліва пунктирна */
+.page-courses article {
+    background: var(--card-bg-rgb);
+    padding: 16px 20px;
+    border-top: 1px solid var(--accent-color);
+    border-bottom: 1px solid var(--accent-color);
+    border-right: 1px solid var(--accent-color);
+    border-left: 3px dashed var(--accent-color);
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Вимога: «назва теми» — більша вага, більший розмір, курсив */
+.page-courses article h3 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-style: italic;
+    margin-top: 0;
+}
+
+.page-courses article ol {
+    padding-left: 1.4rem;
+}
+
+/* Фото в картках трохи більші, ніж у глобальному правилі */
+.page-courses article figure.media-right {
+    width: 40%;
+    min-width: 130px;
+    max-width: 240px;
+}
+
+/* Вимога: фото при наведенні — насиченість 150% (keyframes saturate-up вже є) */
+.page-courses article figure img:hover {
+    animation: saturate-up 0.6s ease forwards;
+}
+
+/* Вимога: відвідані посилання — темно-червоні */
+.page-courses article a:link {
+    color: var(--link-blue);
+}
+
+.page-courses article a:visited {
+    color: darkred;
+}
+
+.page-courses article a:hover {
+    text-decoration: none;
+}
+
+
+/* ==========================================================================
+   Сторінка «Зворотній зв'язок» — Flexbox
+   ========================================================================== */
+
+/* Каркас сторінки: flex-колонка замість grid */
+.page-feedback {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.page-feedback header {
+    padding-top: 150px;
+}
+
+.page-feedback > hr {
+    display: none;
+}
+
+.page-feedback main {
+    flex-grow: 1;                           /* main займає вільне місце, футер внизу */
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Форма — flex-контейнер */
+.page-feedback form {
+    display: flex;
+    flex-flow: row wrap;                    /* flex-direction + flex-wrap */
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;              /* працює, бо є wrap */
+    gap: 20px;
+}
+
+.page-feedback form > br {
+    display: none;                          /* <br> між fieldset і select став би flex-елементом */
+}
+
+.page-feedback form > * {
+    margin: 0;                              /* відступи дає gap */
+}
+
+/* Flex-елементи */
+.page-feedback .feedback-help-text {
+    flex: 1 1 100%;
+}
+
+.page-feedback fieldset {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 360px;
+    padding: 16px 20px;
+    background: var(--card-bg-rgb);
+    border: 2px dashed var(--soft-green);
+    border-radius: 16px;
+}
+
+.form-purpose {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 320px;
+    align-self: flex-end;                   /* притискається донизу ряду, до textarea */
+}
+
+.form-details,
+.form-consent {
+    flex: 1 1 100%;
+}
+
+/* Кнопки: власний flex-контейнер + order */
+.form-actions {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.form-actions button {
+    flex-shrink: 0;                         /* кнопки не стискаються */
+}
+
+.form-actions button[type="reset"] {
+    order: 1;                               /* «Очистити» — зліва */
+    background-color: var(--gray-muted);
+}
+
+.form-actions button[type="submit"] {
+    order: 2;                               /* «Надіслати» — справа */
+}
+
+/* Поля вводу */
+.page-feedback input[type="text"],
+.page-feedback input[type="email"],
+.page-feedback select,
+.page-feedback textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-family: inherit;
+}
+
+.page-feedback textarea {
+    resize: vertical;
+}
+
+.page-feedback input:focus,
+.page-feedback select:focus,
+.page-feedback textarea:focus {
+    outline: 3px solid var(--fun-yellow);
+}
